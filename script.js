@@ -1,13 +1,8 @@
 /*
-Game contains:
+Next:
 
-- 1 Gameboard (module)
-- 2 or more Players (objects)
-- 1 Object that has the logic of the game
-
-Thing in the game:
-- Ability of players to mark board
-- Function that checks for win condition
+-end game on turn 9 or win
+-reset game
 
 */
 
@@ -38,7 +33,7 @@ const jony = Player('Jonathan', 'X');
 const jeny = Player('Jenitina', 'O');
 
 
-const win = ((currentPlayer) => {
+const win = (() => {
     let winCounter = 0;
     const winCondition = [
         [0,1,2], [3,4,5], [6,7,8],
@@ -46,8 +41,10 @@ const win = ((currentPlayer) => {
         [0,4,8], [2,4,6]
     ]
     const winMessage = document.querySelector('.win_message');
+    
 
-    const checkWin = (currentPlayer) => {    
+    const checkWin = (currentPlayer) => { 
+        let _workaround = false;   
         winCondition.forEach(condition => {
             condition.forEach(index => {
                 if(Gameboard.gameboard[index] === currentPlayer.mark) {
@@ -57,50 +54,69 @@ const win = ((currentPlayer) => {
             if(winCounter === 3) {
                 winCounter = 0;
                 winMessage.textContent = `${currentPlayer.name} has won the game`;
+                _workaround = true;
             }
             else {
                 winCounter = 0;
             }
         })
         console.log(`function ran for ${currentPlayer.name}`);
+        return _workaround;
     }
     return {checkWin};
 
 })();
 
 const gamelogic = (() => {
+    const gridSquares = document.querySelectorAll('.gameboardContainer > div');
     let currentPlayer = jony;
-    let nextPlayer = jeny;
-    let playerSwap = '';
-    let turnCounter = 0;
+    let _nextPlayer = jeny;
+    let _playerSwap = '';
+    let _turnCounter = 0;
 
-    const isLegalMove = (index) => {
-        if (Gameboard.gameboard[index] !== undefined) {
-            return false;
-        }
-        else return true;
+    const resetButton = document.querySelector('.resetButton');
+    const resetGame = () => {
+        Gameboard.gameboard = new Array(9);
+        gridSquares.forEach((square) => {
+            square.textContent = '';
+            square.style.pointerEvents = 'auto';
+        })
+        _turnCounter = 0;
+        _playerSwap = '';
+        _nextPlayer = jeny;
+        currentPlayer = jony;
+
     }
 
-    const gridSquares = document.querySelectorAll('.gameboardContainer > div');
-    gridSquares.forEach((square, index) => {
-        square.addEventListener('click', () => {
-            if (isLegalMove(index)) {
-                square.textContent = currentPlayer.mark;
-                currentPlayer.placeMark(index);
+    resetButton.addEventListener('click', resetGame);
+    
+    
+    const gameStart = () => {
+        gridSquares.forEach((square, index) => {
+            square.addEventListener('click', () => {
+                    square.textContent = currentPlayer.mark;
+                    currentPlayer.placeMark(index);
 
-                turnCounter++;
-                if (turnCounter >= 5) {
-                    win.checkWin(currentPlayer);
-                }
-                
-                playerSwap = currentPlayer;
-                currentPlayer = nextPlayer;
-                nextPlayer = playerSwap;
-            }
-            else {
-                console.log('Move is not legal');
-            }
-        })
-    }) 
-    return {currentPlayer};
+                    _turnCounter++;
+                    if (win.checkWin(currentPlayer)) {
+                        console.log('GAME WAS WON. GAME IS OVER');
+                        gridSquares.forEach((square) => {
+                            square.style.pointerEvents = 'none';
+                        })
+                        
+                    }
+                    if (_turnCounter === 9) {
+                        console.log('GAME IS OVER');
+                        
+                    }               
+                    
+                    _playerSwap = currentPlayer;
+                    currentPlayer = _nextPlayer;
+                    _nextPlayer = _playerSwap;
+                    square.style.pointerEvents = 'none';                                
+            })
+        }) 
+    }
+    gameStart();
+    return {currentPlayer, gameStart, resetGame, resetButton};
 })();

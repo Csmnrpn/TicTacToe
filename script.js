@@ -1,15 +1,17 @@
 /*
 Next:
-
--end game on turn 9 or win
--reset game
+1. create start game screen
+2. create player select screen
 
 */
 
-const gameboardContainer = document.querySelector('.gameboardContainer');
+
+
+
 
 const Gameboard = (() => {
     const gameboard = new Array(9);
+    const gameboardContainer = document.querySelector('.gameboardContainer');
     const createBoard = () => {
         for (let i = 0; i < gameboard.length; i++) {
             let gridSquare = document.createElement('div');
@@ -29,9 +31,8 @@ const Player = (name,mark) => {
     return {placeMark, mark, name};
 }
 
-const jony = Player('Jonathan', 'X');
-const jeny = Player('Jenitina', 'O');
-
+const playerOne = Player('JohnDoe', 'X');
+const playerTwo = Player('JaneDoe', 'O');
 
 const win = (() => {
     let winCounter = 0;
@@ -69,8 +70,8 @@ const win = (() => {
 
 const gamelogic = (() => {
     const gridSquares = document.querySelectorAll('.gameboardContainer > div');
-    let currentPlayer = jony;
-    let _nextPlayer = jeny;
+    let currentPlayer = playerOne;
+    let _nextPlayer = playerTwo;
     let _playerSwap = '';
     let _turnCounter = 0;
 
@@ -83,8 +84,8 @@ const gamelogic = (() => {
         })
         _turnCounter = 0;
         _playerSwap = '';
-        _nextPlayer = jeny;
-        currentPlayer = jony;
+        _nextPlayer = playerTwo;
+        currentPlayer = playerOne;
 
     }
 
@@ -117,6 +118,24 @@ const gamelogic = (() => {
             })
         }) 
     }
-    gameStart();
     return {currentPlayer, gameStart, resetGame, resetButton};
+})();
+
+gamelogic.gameStart();
+
+const mainContent = (() => {
+    const startScreen = document.querySelector('.startScreen');
+    const startButton = document.querySelector('.startButton');
+    const nameOne = document.querySelector('#nameOne');
+    const nameTwo = document.querySelector('#nameTwo');
+
+    startButton.addEventListener('click', () => {
+        startScreen.style.display = 'none';
+        if (nameOne.value !== '') {
+        playerOne.name = nameOne.value;
+        }
+        if(nameTwo.value !== '') {
+        playerTwo.name = nameTwo.value;
+        };
+    })
 })();

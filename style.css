@@ -10,15 +10,19 @@ body {
 
 .gridSquare {
     border: 1px solid black;
+    text-align: center;
+    font-size: 90px;
 }
 
 .gameboardContainer {
     display:grid;
-    grid-template: 200px 200px 200px / 200px 200px 200px;
+    grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
     border: 5px solid black;
     border-radius:3px;
-    width: 606px;
-    margin: 0 auto;
+    width: 60%;
+    height: 360px;
+    margin: 3em 0 5em 0;
+    max-width: 360px;
 }
 
 .startScreen {
@@ -94,4 +98,40 @@ body {
 .startButton {
     width: 10rem;
     height: 2rem;
+}
+
+.mainGameContainer {
+    display:flex;
+    max-width: 800px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.resetButton {
+    border: 1px solid black;
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 8px;
+    background-color: #457b9d;
+}
+
+.win_message {
+    width: 99%;
+    text-align: center;
+    padding: 2rem;
+    font: 16px;
+}
+
+.playerInformation {
+    width: 16%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 8rem 1rem 0 1rem;
+}
+
+.playerName {
+    padding: 10px;
+    margin: 10px;
 }

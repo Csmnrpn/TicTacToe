@@ -41,7 +41,7 @@ const win = (() => {
         [0,3,6], [1,4,7], [2,5,8],
         [0,4,8], [2,4,6]
     ]
-    const winMessage = document.querySelector('.win_message');
+    
     
 
     const checkWin = (currentPlayer) => { 
@@ -54,7 +54,6 @@ const win = (() => {
             })
             if(winCounter === 3) {
                 winCounter = 0;
-                winMessage.textContent = `${currentPlayer.name} has won the game`;
                 _workaround = true;
             }
             else {
@@ -69,6 +68,7 @@ const win = (() => {
 })();
 
 const gamelogic = (() => {
+    const winMessage = document.querySelector('.win_message');
     const gridSquares = document.querySelectorAll('.gameboardContainer > div');
     let currentPlayer = playerOne;
     let _nextPlayer = playerTwo;
@@ -86,7 +86,7 @@ const gamelogic = (() => {
         _playerSwap = '';
         _nextPlayer = playerTwo;
         currentPlayer = playerOne;
-
+        winMessage.textContent = '';
     }
 
     resetButton.addEventListener('click', resetGame);
@@ -101,14 +101,15 @@ const gamelogic = (() => {
                     _turnCounter++;
                     if (win.checkWin(currentPlayer)) {
                         console.log('GAME WAS WON. GAME IS OVER');
+                        winMessage.textContent = `${currentPlayer.name} has won the game`;
                         gridSquares.forEach((square) => {
                             square.style.pointerEvents = 'none';
                         })
                         
                     }
-                    if (_turnCounter === 9) {
+                    else if (_turnCounter === 9) {
                         console.log('GAME IS OVER');
-                        
+                        winMessage.textContent = `The game is a draw`;                        
                     }               
                     
                     _playerSwap = currentPlayer;

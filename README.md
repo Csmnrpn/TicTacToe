@@ -1,2 +1,3 @@
 # TicTacToe
-The tic tac toe game
+
+<a href='https://csmnrpn.github.io/TicTacToe/'>Live demo</a>

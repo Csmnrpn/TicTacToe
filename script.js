@@ -1,14 +1,3 @@
-/*
-Next:
-1. create start game screen
-2. create player select screen
-
-*/
-
-
-
-
-
 const Gameboard = (() => {
     const gameboard = new Array(9);
     const gameboardContainer = document.querySelector('.gameboardContainer');
@@ -24,15 +13,15 @@ const Gameboard = (() => {
 
 Gameboard.createBoard();
 
-const Player = (name,mark) => {
+const Player = (name,mark, color) => {
     const placeMark = (index) => {
             Gameboard.gameboard[index] = mark;        
     }
-    return {placeMark, mark, name};
+    return {placeMark, mark, name, color};
 }
 
-const playerOne = Player('JohnDoe', 'X');
-const playerTwo = Player('JaneDoe', 'O');
+const playerOne = Player('JohnDoe', 'X', '#e63946');
+const playerTwo = Player('JaneDoe', 'O', '#1d3557');
 
 const win = (() => {
     let winCounter = 0;
@@ -96,6 +85,7 @@ const gamelogic = (() => {
         gridSquares.forEach((square, index) => {
             square.addEventListener('click', () => {
                     square.textContent = currentPlayer.mark;
+                    square.style.color = currentPlayer.color;
                     currentPlayer.placeMark(index);
 
                     _turnCounter++;
@@ -125,6 +115,8 @@ const gamelogic = (() => {
 gamelogic.gameStart();
 
 const mainContent = (() => {
+    const playerNameOne = document.querySelector('.playerNameOne');
+    const playerNameTwo = document.querySelector('.playerNameTwo');
     const startScreen = document.querySelector('.startScreen');
     const startButton = document.querySelector('.startButton');
     const nameOne = document.querySelector('#nameOne');
@@ -134,9 +126,11 @@ const mainContent = (() => {
         startScreen.style.display = 'none';
         if (nameOne.value !== '') {
         playerOne.name = nameOne.value;
+        playerNameOne.textContent = playerOne.name;
         }
         if(nameTwo.value !== '') {
         playerTwo.name = nameTwo.value;
+        playerNameTwo.textContent = playerTwo.name;
         };
     })
 })();

@@ -91,7 +91,7 @@ const gamelogic = (() => {
                     _turnCounter++;
                     if (win.checkWin(currentPlayer)) {
                         console.log('GAME WAS WON. GAME IS OVER');
-                        winMessage.textContent = `${currentPlayer.name} has won the game`;
+                        winMessage.textContent = `${currentPlayer.name} has won the game.`;
                         gridSquares.forEach((square) => {
                             square.style.pointerEvents = 'none';
                         })
@@ -99,7 +99,7 @@ const gamelogic = (() => {
                     }
                     else if (_turnCounter === 9) {
                         console.log('GAME IS OVER');
-                        winMessage.textContent = `The game is a draw`;                        
+                        winMessage.textContent = `The game is a draw.`;                        
                     }               
                     
                     _playerSwap = currentPlayer;

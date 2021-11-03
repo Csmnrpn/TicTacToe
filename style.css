@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #fff;
+    background-color: #f1faee;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -24,6 +24,7 @@ body {
     height: 360px;
     margin: 3em 0 5em 0;
     max-width: 360px;
+    background-color: #fff;
 }
 
 .startScreen {
@@ -36,7 +37,7 @@ body {
     left: 0;
     z-index: 99;
     flex-wrap: wrap;
-    background-color: #fff;
+    background-color: #f1faee;
     justify-content: center;
     padding-top: 5%;
 }
@@ -54,10 +55,7 @@ body {
     justify-content:center;
     height: 100px;
     min-width: 100px;
-}
-
-.startButton {
-    width: 15%;
+    margin-top: 5em;
 }
 
 .buttonContainer {
@@ -98,7 +96,7 @@ body {
 }
 
 .startButton {
-    margin-top: 4.5rem;
+    margin-top: .5rem;
 }
 
 .mainGameContainer {
@@ -150,3 +148,18 @@ body {
 .activeName {
     border: 5px solid #f4a261;
 }
+
+#nameOne, #nameTwo {
+    padding: .2em;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding-left: .5em;
+    margin-left: 1em;
+}
+
+.nameContainer {
+    display:flex;
+    align-items: center;
+    margin-top: 5rem;
+}
+

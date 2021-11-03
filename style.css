@@ -9,43 +9,17 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.gridSquare {
+.avatar {
+    width: 80px;
+    height: 80px;
     border: 1px solid black;
-    text-align: center;
-    font-size: 90px;
-}
-
-.gameboardContainer {
-    display:grid;
-    grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
-    border: 5px solid black;
-    border-radius:3px;
-    width: 60%;
-    height: 360px;
-    margin: 3em 0 5em 0;
-    max-width: 360px;
+    border-radius: 100px;
+    margin: 5px;
     background-color: #fff;
 }
 
-.startScreen {
-    display:flex;
-    height: 90vh;
-    width: 100vw;
-    padding: 1px;
-    position: absolute;
-    top: 10%;
-    left: 0;
-    z-index: 99;
-    flex-wrap: wrap;
-    background-color: #f1faee;
-    justify-content: center;
-    padding-top: 5%;
-}
-
-.title {
-    font-size: 4em;
-    text-align: center;
-    margin-bottom: 5%;
+.avatar:hover {
+    background-color: #a8dadc;
 }
 
 .box {
@@ -64,39 +38,35 @@ body {
     justify-content: center;
 }
 
-
-.avatar {
-    width: 80px;
-    height: 80px;
-    border: 1px solid black;
-    border-radius: 100px;
-    margin: 5px;
-    background-color: #fff;
-
-}
-
-.nameContainer {
-    width: 100%;
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
 .blank {
     width: 90px;
     height: 94px;
-}
-
-.avatar:hover {
-    background-color: #a8dadc;
 }
 
 .blank:hover {
     background-color: inherit;
 }
 
-.startButton {
-    margin-top: .5rem;
+.gridSquare {
+    border: 1px solid black;
+    text-align: center;
+    font-size: 90px;
+}
+
+.gameboardContainer {
+    display:grid;
+    grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+    border: 5px solid black;
+    border-radius:3px;
+    width: 60%;
+    height: 360px;
+    margin: 3em 0 5em 0;
+    max-width: 360px;
+    background-color: #fff;
+}
+
+.inactive, .inactive:hover {
+    background-color:grey;
 }
 
 .mainGameContainer {
@@ -107,46 +77,11 @@ body {
     justify-content: space-evenly;
 }
 
-.resetButton, .startButton {
-    width: 12rem;
-    height: 2rem;
-    border: 1px solid black;
-    padding: 5px;
-    font-size: 20px;
-    border-radius: 8px;
-    background-color: #a8dadc;
-}
-
-.startButton:hover, .resetButton:hover {
-    background-color: #457b9d;
-}
-
-.startButton:active, .resetButton:active {
-    background-color: #a8dadc;
-}
-
-.win_message {
-    width: 99%;
-    text-align: center;
-    padding: 2rem;
-    font: 16px;
-}
-
-.playerInformation {
-    width: 16%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin: 8rem 1rem 0 1rem;
-}
-
-.playerName {
-    padding: 10px;
-    margin: 10px;
-}
-
-.activeName {
-    border: 5px solid #f4a261;
+.nameContainer {
+    width: 100%;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 #nameOne, #nameTwo {
@@ -163,3 +98,79 @@ body {
     margin-top: 5rem;
 }
 
+.playerInformation {
+    width: 16%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 8rem 1rem 0 1rem;
+    height: 150px;
+}
+
+.playerName {
+    padding: 10px;
+    margin: 10px;
+}
+
+.resetButton, .startButton {
+    width: 12rem;
+    height: 2rem;
+    border: 1px solid black;
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 8px;
+    background-color: #a8dadc;
+}
+
+.startScreen {
+    display:flex;
+    height: 90vh;
+    width: 100vw;
+    padding: 1px;
+    position: absolute;
+    top: 10%;
+    left: 0;
+    z-index: 99;
+    flex-wrap: wrap;
+    background-color: #f1faee;
+    justify-content: center;
+    padding-top: 5%;
+}
+
+.startButton {
+    margin-top: .5rem;
+}
+
+.startButton:hover, .resetButton:hover {
+    background-color: #457b9d;
+}
+
+.startButton:active, .resetButton:active {
+    background-color: #a8dadc;
+}
+
+.title {
+    font-size: 4em;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.win_message {
+    width: 99%;
+    text-align: center;
+    padding: 2rem;
+    font: 16px;
+}
+
+@media only screen and (max-width:640px) {
+
+    .gameboardContainer {
+        order: 2;
+    }
+
+    .playerInformation {
+        margin-top: 4rem;
+        width: 120px;
+        order: 1;
+    }
+}
